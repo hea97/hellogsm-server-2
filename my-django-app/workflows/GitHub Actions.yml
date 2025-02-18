@@ -1,0 +1,21 @@
+name: Deploy to CodeDeploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Create deployment in CodeDeploy
+      run: |
+        COMMIT_ID=${GITHUB_SHA}
+        echo "Deploying commit ${COMMIT_ID} to CodeDeploy"
+        # 예시: CodeDeploy 배포 명령어
+        aws deploy create-deployment --application-name MyApp --deployment-group-name MyDeploymentGroup --revision revisionType=GitHub,commitId=$COMMIT_ID
