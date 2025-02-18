@@ -13,6 +13,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Ensure Dockerfile exists
+      run: |
+        ls -al
+        # Dockerfile이 존재하는지 확인
+        if [ ! -f Dockerfile ]; then
+          echo "Dockerfile not found!"
+          exit 1
+        fi
+
     - name: Build the Docker image
       run: |
         timestamp=$(date +%s)
