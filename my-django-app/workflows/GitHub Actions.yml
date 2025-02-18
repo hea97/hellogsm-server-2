@@ -1,4 +1,4 @@
-name: Deploy to CodeDeploy
+name: AWS CI/CD
 
 on:
   push:
@@ -8,14 +8,17 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Create deployment in CodeDeploy
-      run: |
-        COMMIT_ID=${GITHUB_SHA}
-        echo "Deploying commit ${COMMIT_ID} to CodeDeploy"
-        # 예시: CodeDeploy 배포 명령어
-        aws deploy create-deployment --application-name MyApp --deployment-group-name MyDeploymentGroup --revision revisionType=GitHub,commitId=$COMMIT_ID
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2  # 서울 리전 설정
+
+      - name: Deploy Application
+        run: |
+          # Your deployment commands
