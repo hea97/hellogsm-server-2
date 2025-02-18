@@ -1,0 +1,51 @@
+name: Django Production CD Workflow
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Make environment file
+        run: echo "${{ secrets.PROD_ENV }}" > .env
+        shell: bash
+        
+      - name: Build Docker Image
+        run: |
+          docker build -t my-django-app -f Dockerfile .
+
+      - name: Save Docker Image
+        run: |
+          docker save my-django-app | gzip > my-django-app.tar.gz
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Upload to S3
+        run: aws s3 cp my-django-app.tar.gz s3://${{ secrets.BUCKET_NAME }}/prod/my-django-app.tar.gz
+
+      - name: Deploy with AWS CodeDeploy
+        run: aws deploy create-deployment --application-name django-prod-codedeploy --deployment-config-name CodeDeployDefault.AllAtOnce --deployment-group-name django-prod-group --s3-location bucket=${{ secrets.BUCKET_NAME }},bundleType=tgz,key=prod/my-django-app.tar.gz
