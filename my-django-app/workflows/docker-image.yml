@@ -12,11 +12,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    
-    - name: Ensure Dockerfile exists
+
+    - name: List files to verify Dockerfile exists
       run: |
         ls -al
-        # Dockerfile이 존재하는지 확인
+        # Dockerfile이 현재 디렉토리에 있는지 확인
         if [ ! -f Dockerfile ]; then
           echo "Dockerfile not found!"
           exit 1
