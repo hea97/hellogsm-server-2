@@ -1,0 +1,9 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ec2-user/aws-study
+hooks:
+  AfterInstall:
+    - location: scripts/after_install.sh
+      runas: ec2-user
