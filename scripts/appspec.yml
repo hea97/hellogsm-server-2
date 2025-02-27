@@ -5,7 +5,8 @@ files:
     destination: /home/ec2-user/aws-study
 hooks:
   AfterInstall:
-    - location: scripts/prod-deploy.sh
+    - location: scripts/after_install.sh
       timeout: 300
       runas: ec2-user
+
 
