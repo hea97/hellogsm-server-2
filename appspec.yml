@@ -5,6 +5,7 @@ files:
     destination: /home/ec2-user/aws-study
 hooks:
   AfterInstall:
-    - location: hellogsm-server-2/prod-deploy.sh
+    - location: scripts/prod-deploy.sh
       timeout: 300
       runas: ec2-user
+
