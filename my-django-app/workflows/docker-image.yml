@@ -16,13 +16,22 @@ jobs:
     - name: List files to verify Dockerfile exists
       run: |
         ls -al
-        # Dockerfile이 현재 디렉토리에 있는지 확인
         if [ ! -f Dockerfile ]; then
           echo "Dockerfile not found!"
           exit 1
         fi
 
-    - name: Build the Docker image
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+    - name: Build and tag the Docker image
       run: |
         timestamp=$(date +%s)
-        docker build . --file Dockerfile --tag my-image-name:$timestamp
+        docker build . --file Dockerfile --tag my-django-app:$timestamp
+        docker tag my-django-app:$timestamp your-dockerhub-username/my-django-app:latest
+        docker tag my-django-app:$timestamp your-dockerhub-username/my-django-app:$timestamp
+
+    - name: Push the Docker image to Docker Hub
+      run: |
+        docker push your-dockerhub-username/my-django-app:latest
+        docker push your-dockerhub-username/my-django-app:$timestamp
