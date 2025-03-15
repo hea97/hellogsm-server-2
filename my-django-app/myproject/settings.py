@@ -1,28 +1,29 @@
-from .settings import *
+# settings.py
 
-DEBUG = False
+# S3 설정을 위한 django-storages 설정 추가
+INSTALLED_APPS = [
+    # 기존 앱들
+    'storages',
+]
 
-# 프로덕션 환경에서 허용할 호스트
-ALLOWED_HOSTS = ['yourdomain.com', '3.34.253.238']
+# AWS S3 설정
+AWS_ACCESS_KEY_ID = 'your-access-key-id'  # 실제 AWS 접근 키
+AWS_SECRET_ACCESS_KEY = 'your-secret-access-key'  # 실제 AWS 비밀 키
+AWS_STORAGE_BUCKET_NAME = 'your-s3-bucket-name'  # 사용할 S3 버킷 이름
+AWS_S3_REGION_NAME = 'your-region'  # 예: 'us-west-1'
+AWS_S3_SIGNATURE_VERSION = 's3v4'  # 서명 버전 설정
+AWS_DEFAULT_ACL = None  # 기본 ACL 설정
 
-# PostgreSQL 데이터베이스 설정 (실제 DB 정보로 수정)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_db_name',        # 실제 DB 이름
-        'USER': 'your_db_user',        # 실제 DB 사용자명
-        'PASSWORD': 'your_db_password',# 실제 DB 비밀번호
-        'HOST': 'your_db_host',        # 데이터베이스 호스트 (localhost 또는 DB 서버 주소)
-        'PORT': 'your_db_port',        # PostgreSQL의 포트 (기본값: 5432)
-    }
+# Static 파일 설정
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/static/'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# Media 파일 설정
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.{AWS_S3_REGION_NAME}.amazonaws.com/media/'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# S3에 대한 추가 설정 (필요시)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
 }
 
-# 정적 파일과 미디어 파일을 저장할 디렉토리 경로 설정
-STATIC_ROOT = '/path/to/your/static'  # 실제 경로로 수정
-MEDIA_ROOT = '/path/to/your/media'    # 실제 경로로 수정
-
-# 기타 기본 설정
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-
-# 만약 Gunicorn이나 다른 프로덕션 서버를 사용한다면 WSGI 설정도 고려해야 합니다.
