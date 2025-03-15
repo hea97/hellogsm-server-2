@@ -22,8 +22,7 @@ STATIC_ROOT = '/path/to/your/static'  # 실제 경로로 수정
 MEDIA_ROOT = '/path/to/your/media'    # 실제 경로로 수정
 
 # 기타 기본 설정
-# 정적 파일 서비스 설정
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-# 로그 설정 등 필요한 다른 설정을 추가로 설정할 수 있습니다.
+# 만약 Gunicorn이나 다른 프로덕션 서버를 사용한다면 WSGI 설정도 고려해야 합니다.
