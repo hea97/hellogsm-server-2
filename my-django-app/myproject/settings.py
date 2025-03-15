@@ -3,7 +3,7 @@ from .settings import *
 DEBUG = False
 
 # 프로덕션 환경에서 허용할 호스트
-ALLOWED_HOSTS = ['yourdomain.com', 'your-ec2-public-ip']
+ALLOWED_HOSTS = ['yourdomain.com', '3.34.253.238']
 
 # PostgreSQL 데이터베이스 설정 (실제 DB 정보로 수정)
 DATABASES = {
