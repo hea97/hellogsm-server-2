@@ -1,9 +1,7 @@
-name: Docker Image CI
+name: Docker Image CI/CD
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
     branches: [ "main" ]
 
 jobs:
@@ -16,22 +14,23 @@ jobs:
     - name: List files to verify Dockerfile exists
       run: |
         ls -al
-        if [ ! -f Dockerfile ]; then
+        if [ ! -f my-django-app/Dockerfile ]; then
           echo "Dockerfile not found!"
           exit 1
         fi
 
-    - name: Log in to Docker Hub
-      run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-
     - name: Build and tag the Docker image
       run: |
         timestamp=$(date +%s)
-        docker build . --file Dockerfile --tag my-django-app:$timestamp
-        docker tag my-django-app:$timestamp your-dockerhub-username/my-django-app:latest
-        docker tag my-django-app:$timestamp your-dockerhub-username/my-django-app:$timestamp
+        docker build . --file my-django-app/Dockerfile --tag my-django-app:$timestamp
+        docker tag my-django-app:$timestamp my-dockerhub-username/my-django-app:latest
+        docker tag my-django-app:$timestamp my-dockerhub-username/my-django-app:$timestamp
+
+    - name: Log in to Docker Hub
+      run: |
+        echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
 
     - name: Push the Docker image to Docker Hub
       run: |
-        docker push your-dockerhub-username/my-django-app:latest
-        docker push your-dockerhub-username/my-django-app:$timestamp
+        docker push my-dockerhub-username/my-django-app:latest
+        docker push my-dockerhub-username/my-django-app:$timestamp
