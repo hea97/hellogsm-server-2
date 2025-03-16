@@ -9,8 +9,8 @@ INSTALLED_APPS = [
 # AWS S3 설정
 AWS_ACCESS_KEY_ID = 'your-access-key-id'  # 실제 AWS 접근 키
 AWS_SECRET_ACCESS_KEY = 'your-secret-access-key'  # 실제 AWS 비밀 키
-AWS_STORAGE_BUCKET_NAME = 'your-s3-bucket-name'  # 사용할 S3 버킷 이름
-AWS_S3_REGION_NAME = 'your-region'  # 예: 'us-west-1'
+AWS_STORAGE_BUCKET_NAME = 'aws-studys'  # 사용할 S3 버킷 이름
+AWS_S3_REGION_NAME = 'ap-northeast-2'   # S3 버킷 리전
 AWS_S3_SIGNATURE_VERSION = 's3v4'  # 서명 버전 설정
 AWS_DEFAULT_ACL = None  # 기본 ACL 설정
 
