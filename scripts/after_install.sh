@@ -3,7 +3,7 @@
 IMAGE_NAME=my-django-app
 CONTAINER_NAME=django-prod-server
 DOCKERFILE_NAME=Dockerfile
-S3_BUCKET_NAME=your-s3-bucket-name  # S3 버킷 이름
+S3_BUCKET_NAME=aws-study  # S3 버킷 이름
 TAR_FILE=my-django-app.tar.gz
 
 echo "> 현재 실행 중인 Docker 컨테이너 ID 확인" >> /home/ec2-user/deploy.log
