@@ -4,8 +4,10 @@ FROM python:3.10-slim
 # 작업 디렉토리 설정
 WORKDIR /app
 
-# 코드 복사 및 의존성 설치
-COPY requirements.txt .
+# requirements.txt 파일 복사
+COPY my-django-app/requirements.txt .  # 'my-django-app' 디렉토리에서 requirements.txt 복사
+
+# 의존성 설치
 RUN pip install -r requirements.txt
 
 # 애플리케이션 코드 복사
