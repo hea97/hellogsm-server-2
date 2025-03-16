@@ -30,5 +30,6 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 INSTALLED_APPS = [
     # 기존 앱들
+    'django.contrib.staticfiles',  # 이 앱이 있어야 collectstatic 명령어가 작동합니다.
     'storages',  # S3 사용을 위한 django-storages 추가
 ]
