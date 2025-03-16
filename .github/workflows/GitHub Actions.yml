@@ -15,7 +15,7 @@ jobs:
     - name: List files to verify Dockerfile exists
       run: |
         ls -al
-        if [ ! -f Dockerfile ]; then
+        if [ ! -f ./Dockerfile ]; then
           echo "❌ Dockerfile not found!"
           exit 1
         fi
