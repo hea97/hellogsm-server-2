@@ -20,14 +20,10 @@ jobs:
           exit 1
         fi
 
-    # 작업 디렉토리 이동 (requirements.txt가 있는 디렉토리로)
-    - name: Change directory to my-django-app
-      run: cd my-django-app
-
     - name: Build and tag the Docker image
       run: |
         timestamp=$(date +%s)
-        docker build ./my-django-app -t my-django-app:$timestamp
+        docker build -f Dockerfile . -t my-django-app:$timestamp  # Dockerfile 경로 지정
         docker tag my-django-app:$timestamp my-dockerhub-username/my-django-app:latest
         docker tag my-django-app:$timestamp my-dockerhub-username/my-django-app:$timestamp
 
