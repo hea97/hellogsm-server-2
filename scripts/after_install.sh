@@ -3,6 +3,8 @@
 IMAGE_NAME=my-django-app
 CONTAINER_NAME=django-prod-server
 DOCKERFILE_NAME=Dockerfile
+S3_BUCKET_NAME=your-s3-bucket-name  # S3 버킷 이름
+TAR_FILE=my-django-app.tar.gz
 
 echo "> 현재 실행 중인 Docker 컨테이너 ID 확인" >> /home/ec2-user/deploy.log
 CURRENT_CONTAINER_ID=$(docker ps -q -f name=$CONTAINER_NAME)
@@ -17,10 +19,12 @@ else
 fi
 
 echo "> S3에서 최신 이미지 다운로드" >> /home/ec2-user/deploy.log
-aws s3 cp s3://your-s3-bucket-name/prod/my-django-app.tar.gz .
+aws s3 cp s3://$S3_BUCKET_NAME/prod/$TAR_FILE . || { echo "S3 다운로드 실패!"; exit 1; }
 
 echo "> Docker 이미지 로드" >> /home/ec2-user/deploy.log
-docker load < my-django-app.tar.gz
+docker load < $TAR_FILE || { echo "Docker 이미지 로드 실패!"; exit 1; }
 
 echo "> 새 컨테이너 실행" >> /home/ec2-user/deploy.log
-docker run -d --name $CONTAINER_NAME -p 8000:8000 $IMAGE_NAME
+docker run -d --name $CONTAINER_NAME -p 8000:8000 --restart always $IMAGE_NAME || { echo "컨테이너 실행 실패!"; exit 1; }
+
+echo "> 배포 완료!" >> /home/ec2-user/deploy.log
