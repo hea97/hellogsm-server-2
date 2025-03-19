@@ -16,8 +16,8 @@ jobs:
       # production용 settings 파일 생성 (필요한 경우)
       - name: Create production settings file
         run: |
-          touch ./hellogsm-server-2/my-django-app/myproject/settings.py
-          echo "${{ secrets.PROD_SETTINGS }}" > ./myproject/settings_prod.py
+          touch ./my-django-app/myproject/settings.py
+          echo "${{ secrets.PROD_SETTINGS }}" > ./my-django-app/myproject/settings.py
 
       # 소스코드를 압축 (빌드 단계 없이)
       - name: Zip source code
