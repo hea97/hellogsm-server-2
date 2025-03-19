@@ -4,6 +4,7 @@ files:
   - source: /path/to/local/files/
     destination: /home/ec2-user/aws-study/
     overwrite: true  
+file_exist_behavior: overwrite
 permissions:
   - object: /home/ec2-user/aws-study
     pattern: "**"
