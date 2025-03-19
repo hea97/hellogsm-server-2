@@ -1,20 +1,21 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /home/ec2-user/aws-study
-    overwrite: yes
-
+  - source: /path/to/local/files/
+    destination: /home/ec2-user/aws-study/
+    overwrite: true  
 permissions:
   - object: /home/ec2-user/aws-study
     pattern: "**"
     owner: ec2-user
     group: ec2-user
-    
+
 hooks:
+  BeforeInstall:
+    - location: scripts/delete_old_file.sh
+      timeout: 300
+      runas: ec2-user
   AfterInstall:
     - location: scripts/after_install.sh
       timeout: 300
       runas: ec2-user
-
-
