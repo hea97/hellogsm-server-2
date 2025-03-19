@@ -15,7 +15,7 @@ jobs:
     - name: List files to verify Dockerfile exists
       run: |
         ls -al
-        if [ ! -f ./Dockerfile ]; then
+        if [ ! -f ./my-django-app/Dockerfile ]; then
           echo "❌ Dockerfile not found!"
           exit 1
         fi
@@ -23,7 +23,7 @@ jobs:
     - name: Build and tag the Docker image
       run: |
         timestamp=$(date +%s)
-        docker build -f ./Dockerfile . -t my-django-app:$timestamp  # Dockerfile 경로 지정
+        docker build -f ./my-django-app/Dockerfile . -t my-django-app:$timestamp  # 정확한 Dockerfile 경로
         docker tag my-django-app:$timestamp my-dockerhub-username/my-django-app:latest
         docker tag my-django-app:$timestamp my-dockerhub-username/my-django-app:$timestamp
 
