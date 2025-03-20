@@ -1,10 +1,10 @@
 version: 0.0
 os: linux
 files:
-  - source: /path/to/local/files/
+  - source: /
     destination: /home/ec2-user/aws-study/
-    overwrite: true  
-file_exist_behavior: overwrite
+    file_exists_behavior: OVERWRITE  
+
 permissions:
   - object: /home/ec2-user/aws-study
     pattern: "**"
@@ -13,7 +13,7 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: scripts/after_install.sh
+    - location: scripts/cleanup.sh  
       timeout: 300
       runas: ec2-user
   AfterInstall:
