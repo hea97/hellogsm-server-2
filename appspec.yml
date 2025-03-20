@@ -13,10 +13,6 @@ permissions:
     group: ec2-user
 
 hooks:
-  BeforeInstall:
-    - location: scripts/cleanup.sh  # Git 파일 삭제를 위한 스크립트
-      timeout: 300
-      runas: ec2-user
   ApplicationStart:
     - location: scripts/after_install.sh  # 애플리케이션 시작을 위한 스크립트
       timeout: 300
