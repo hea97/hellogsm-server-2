@@ -12,6 +12,7 @@ rm -f /home/ec2-user/aws-study/.git/COMMIT_EDITMSG || { echo "COMMIT_EDITMSG 삭
 rm -f /home/ec2-user/aws-study/.git/config || { echo "config 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/HEAD || { echo "HEAD 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/ORIG_HEAD || { echo "ORIG_HEAD 삭제 실패!"; exit 1; }
+rm -f /home/ec2-user/aws-study/.git/packed-refs || { echo "packed-refs 삭제 실패!"; exit 1; }  # packed-refs 삭제 추가
 
 # description 파일 처리
 if [ -f /home/ec2-user/aws-study/.git/description ]; then
