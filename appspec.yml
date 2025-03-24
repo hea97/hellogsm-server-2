@@ -4,7 +4,7 @@ os: linux
 files:
   - source: /  # 로컬에서 배포할 파일들
     destination: /home/ec2-user/aws-study
-    file_exists_behavior: OVERWRITE  # 파일이 존재할 경우 덮어쓰기
+file_exists_behavior: OVERWRITE  # 파일이 존재할 경우 덮어쓰기
 
 permissions:
   - object: /home/ec2-user/aws-study
