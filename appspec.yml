@@ -17,6 +17,6 @@ permissions:
 
 hooks:
   AfterInstall:  
-    - location: aws-study/scripts/deploy.sh
+    - location: ascripts/deploy.sh
       timeout: 300
       runas: ec2-user
