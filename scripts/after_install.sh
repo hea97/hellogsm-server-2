@@ -12,6 +12,15 @@ rm -f /home/ec2-user/aws-study/.git/COMMIT_EDITMSG || { echo "COMMIT_EDITMSG 삭
 rm -f /home/ec2-user/aws-study/.git/config || { echo "config 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/HEAD || { echo "HEAD 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/ORIG_HEAD || { echo "ORIG_HEAD 삭제 실패!"; exit 1; }
+rm -f /home/ec2-user/aws-study/.git/description || { echo "description 삭제 실패!"; exit 1; }
+
+# Git 관련 디렉토리 삭제 (필요한 경우)
+rm -rf /home/ec2-user/aws-study/.git/branches || { echo "branches 디렉토리 삭제 실패!"; exit 1; }
+rm -rf /home/ec2-user/aws-study/.git/hooks || { echo "hooks 디렉토리 삭제 실패!"; exit 1; }
+rm -rf /home/ec2-user/aws-study/.git/info || { echo "info 디렉토리 삭제 실패!"; exit 1; }
+rm -rf /home/ec2-user/aws-study/.git/logs || { echo "logs 디렉토리 삭제 실패!"; exit 1; }
+rm -rf /home/ec2-user/aws-study/.git/objects || { echo "objects 디렉토리 삭제 실패!"; exit 1; }
+rm -rf /home/ec2-user/aws-study/.git/refs || { echo "refs 디렉토리 삭제 실패!"; exit 1; }
 
 echo "> 현재 실행 중인 Docker 컨테이너 ID 확인" >> /home/ec2-user/deploy.log
 CURRENT_CONTAINER_ID=$(docker ps -q -f name=$CONTAINER_NAME)
