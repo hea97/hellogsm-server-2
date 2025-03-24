@@ -14,6 +14,6 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: scripts/after_install.sh
+    - location: hellogsm-server-2/scripts/after_install.sh
       timeout: 300
       runas: ec2-user
