@@ -12,7 +12,12 @@ rm -f /home/ec2-user/aws-study/.git/COMMIT_EDITMSG || { echo "COMMIT_EDITMSG 삭
 rm -f /home/ec2-user/aws-study/.git/config || { echo "config 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/HEAD || { echo "HEAD 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/ORIG_HEAD || { echo "ORIG_HEAD 삭제 실패!"; exit 1; }
-rm -f /home/ec2-user/aws-study/.git/description || { echo "description 삭제 실패!"; exit 1; }
+
+# description 파일 강제 삭제 (이 부분을 확인 후 덮어쓰기)
+if [ -f /home/ec2-user/aws-study/.git/description ]; then
+  echo "> description 파일 존재, 삭제 시도..." >> /home/ec2-user/deploy.log
+  rm -f /home/ec2-user/aws-study/.git/description || { echo "description 삭제 실패!"; exit 1; }
+fi
 
 # Git 관련 디렉토리 삭제 (필요한 경우)
 rm -rf /home/ec2-user/aws-study/.git/branches || { echo "branches 디렉토리 삭제 실패!"; exit 1; }
