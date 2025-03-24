@@ -13,7 +13,7 @@ permissions:
     group: ec2-user
 
 hooks:
-  AfterInstall:
-    - location: /home/ec2-user/aws-study/scripts/after_install.sh
+  ApplicationStart:
+    - location: scripts/after_install.sh
       timeout: 300
       runas: ec2-user
