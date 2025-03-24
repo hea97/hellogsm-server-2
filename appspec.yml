@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 
 files:
-  - source: /  # 로컬에서 배포할 파일들
+  - source: ./my-app/  # 로컬의 my-app 디렉토리에서
     destination: /home/ec2-user/aws-study
 file_exists_behavior: OVERWRITE  # 파일이 존재할 경우 덮어쓰기
 
@@ -13,7 +13,7 @@ permissions:
     group: ec2-user
 
 hooks:
-  ApplicationStart:
-    - location: scripts/after_install.sh  # 애플리케이션 시작 스크립트
+  AfterInstall:
+    - location: /home/ec2-user/aws-study/scripts/after_install.sh
       timeout: 300
       runas: ec2-user
