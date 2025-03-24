@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 
 files:
-  - source: ./my-app/  # 로컬의 my-app 디렉토리에서
+  - source: / 
     destination: /home/ec2-user/aws-study
 file_exists_behavior: OVERWRITE  # 파일이 존재할 경우 덮어쓰기
 
