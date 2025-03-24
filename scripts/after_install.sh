@@ -13,10 +13,18 @@ rm -f /home/ec2-user/aws-study/.git/config || { echo "config 삭제 실패!"; ex
 rm -f /home/ec2-user/aws-study/.git/HEAD || { echo "HEAD 삭제 실패!"; exit 1; }
 rm -f /home/ec2-user/aws-study/.git/ORIG_HEAD || { echo "ORIG_HEAD 삭제 실패!"; exit 1; }
 
-# description 파일 강제 삭제 (이 부분을 확인 후 덮어쓰기)
+# description 파일 처리
 if [ -f /home/ec2-user/aws-study/.git/description ]; then
   echo "> description 파일 존재, 삭제 시도..." >> /home/ec2-user/deploy.log
   rm -f /home/ec2-user/aws-study/.git/description || { echo "description 삭제 실패!"; exit 1; }
+  echo "> description 파일 삭제 완료!" >> /home/ec2-user/deploy.log
+fi
+
+# 파일이 여전히 존재한다면 빈 파일로 덮어쓰기
+if [ -f /home/ec2-user/aws-study/.git/description ]; then
+  echo "> description 파일 여전히 존재, 빈 파일로 덮어쓰기..." >> /home/ec2-user/deploy.log
+  echo "" > /home/ec2-user/aws-study/.git/description || { echo "description 덮어쓰기 실패!"; exit 1; }
+  echo "> description 파일 덮어쓰기 완료!" >> /home/ec2-user/deploy.log
 fi
 
 # Git 관련 디렉토리 삭제 (필요한 경우)
