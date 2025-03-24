@@ -9,7 +9,7 @@ TAR_FILE=my-django-app.tar.gz
 # Git 관련 파일 삭제
 echo "> Git 관련 파일 삭제 중..." >> /home/ec2-user/deploy.log
 rm -f /home/ec2-user/aws-study/.git/COMMIT_EDITMSG || { echo "COMMIT_EDITMSG 삭제 실패!"; exit 1; }
-rm -rf /home/ec2-user/aws-study/.git/* || { echo "기타 Git 파일 삭제 실패!"; exit 1; }
+# rm -rf /home/ec2-user/aws-study/.git/* || { echo "기타 Git 파일 삭제 실패!"; exit 1; }
 
 echo "> 현재 실행 중인 Docker 컨테이너 ID 확인" >> /home/ec2-user/deploy.log
 CURRENT_CONTAINER_ID=$(docker ps -q -f name=$CONTAINER_NAME)
