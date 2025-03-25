@@ -1,21 +1,14 @@
 #!/bin/bash
 
-IMAGE_NAME=hellogsm-prod-server-img
-CONTAINER_NAME=hellogsm-prod-server
+IMAGE_NAME=my-django-app
+CONTAINER_NAME=my-django-app
 DOCKERFILE_NAME=DockerfileProd
+BUILD_DIR="/home/ec2-user/aws-study/"
 
-echo "> 현재 실행 중인 Docker 컨테이너 ID 확인" >> /home/ec2-user/deploy.log
-CURRENT_CONTAINER_ID=$(docker ps -q -f name=$CONTAINER_NAME)
+cd $BUILD_DIR || exit 1
 
-if [ -z $CURRENT_CONTAINER_ID ]
-then
-  echo "> 현재 구동중인 Docker 컨테이너가 없으므로 종료하지 않습니다." >> /home/ec2-user/deploy.log
-else
-  echo "> sudo docker stop $CURRENT_CONTAINER_ID"
-  sudo docker stop $CURRENT_CONTAINER_ID
-  sudo docker rm $CURRENT_CONTAINER_ID
-fi
+docker stop $CONTAINER_NAME 2>/dev/null
+docker rm $CONTAINER_NAME 2>/dev/null
 
-cd /home/ec2-user/builds/
 docker build -t $IMAGE_NAME -f $DOCKERFILE_NAME .
 docker run -d --name $CONTAINER_NAME -p 8080:8080 $IMAGE_NAME
