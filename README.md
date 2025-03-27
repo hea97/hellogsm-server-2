@@ -25,4 +25,4 @@ Container: Docker
 또한, CI/CD를 통해 소프트웨어 배포의 자동화 및 효율성 향상을 목표로 했습니다
 
 # 📄 관련 블로그 글
-실습 과정과 상세한 내용은[[실습] VPC(network), CICD 해보기!](https://velog.io/@heeeaaaa/%EC%8B%A4%EC%8A%B5-VPCnetwork-CICD-%ED%95%B4%EB%B3%B4%EA%B8%B0)에서 확인할 수 있습니다.
+실습 과정과 상세한 내용은 [AWS 실습 이야기: VPC, EC2, Docker와 CI/CD 파이프라인 자동화](https://velog.io/@heeeaaaa/%EC%8B%A4%EC%8A%B5-VPCnetwork-CICD-%ED%95%B4%EB%B3%B4%EA%B8%B0)에서 확인할 수 있습니다.
